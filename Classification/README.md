@@ -30,7 +30,7 @@ To explore these notebooks, ensure you have Jupyter Notebook or JupyterLab insta
 Clone the MachineLearning repository and navigate to the "Classification" directory:
 
 ```bash
-git clone https://github.com/your-username/MachineLearning.git
+git clone https://github.com/DominikHommer/MachineLearning.git
 cd MachineLearning/Classification
 ```
 

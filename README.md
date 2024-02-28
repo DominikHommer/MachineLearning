@@ -47,7 +47,7 @@ The main objectives of this repository are to:
 
 - Python 3
 - Jupyter Notebook
-- Libraries: NumPy, Pandas, Matplotlib, Scikit-Learn, TensorFlow/Keras (add or remove libraries based on your projects)
+- Libraries: NumPy, Pandas, Matplotlib, Scikit-Learn, TensorFlow/Keras
 
 ## Contributing
 

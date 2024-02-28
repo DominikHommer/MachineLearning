@@ -6,7 +6,7 @@
 # I initially embarked on this project to experiment with the application of Support Vector Machines (SVM) in the context of email spam detection. Surprisingly, the results were impressively strong right off the bat. The process involved training an SVM model on a dataset and then validating its performance on an entirely new dataset to test its generalization capabilities.
 # 
 
-# In[32]:
+# In[40]:
 
 
 import pandas as pd
@@ -15,6 +15,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import GridSearchCV
+from joblib import dump, load
+
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
@@ -25,7 +27,7 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 # [Spam Mails Dataset on Kaggle](https://www.kaggle.com/datasets/venky73/spam-mails-dataset/data)
 # 
 
-# In[33]:
+# In[41]:
 
 
 df = pd.read_csv('spam_ham_dataset.csv')
@@ -37,7 +39,7 @@ df.head()
 # I split the dataset into training and testing sets, applied TF-IDF vectorization to convert the email texts into numerical features, and trained an SVM model with a linear kernel.
 # 
 
-# In[34]:
+# In[42]:
 
 
 X = df['text']
@@ -61,7 +63,7 @@ print("\nClassification Report:\n", classification_report(y_test, y_pred))
 # To further refine the model, I utilized GridSearchCV to find the optimal hyperparameters for the SVM model.
 # 
 
-# In[35]:
+# In[43]:
 
 
 param_grid = {'C': [0.1, 1, 10, 100], 'gamma': [1, 0.1, 0.01, 0.001], 'kernel': ['rbf']}
@@ -74,7 +76,7 @@ grid.fit(X_train_vectors, y_train)
 # After finding the best hyperparameters, I evaluated the optimized model's performance on the test set.
 # 
 
-# In[36]:
+# In[44]:
 
 
 print("Best Hyperparameters:", grid.best_params_)
@@ -85,6 +87,7 @@ y_pred = best_model.predict(X_test_vectors)
 
 print("Accuracy of the Best Model:", accuracy_score(y_test, y_pred))
 print("Classification Report of the Best Model:\n", classification_report(y_test, y_pred))
+dump(best_model, 'best_spam_model.joblib')
 
 
 # ## Testing the Model on New Data
@@ -93,7 +96,7 @@ print("Classification Report of the Best Model:\n", classification_report(y_test
 # 
 # [Spam Email Dataset on Kaggle](https://www.kaggle.com/datasets/jackksoncsie/spam-email-dataset)
 
-# In[37]:
+# In[45]:
 
 
 val_df = pd.read_csv('emails.csv')
